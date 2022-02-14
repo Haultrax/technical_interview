@@ -55,4 +55,64 @@ defmodule TechnicalInterviewTest do
                List.foldl(Enum.to_list(1..1_000_000), 0, &(&1 + &2))
     end
   end
+
+  describe "any?" do
+    test "empty list" do
+      assert T.any?([]) == false
+    end
+
+    test "list contains true" do
+      assert T.any?([true]) == true
+    end
+
+    test "list contains false" do
+      assert T.any?([false]) == false
+    end
+
+    test "list contains true and false" do
+      assert T.any?([true, false]) == true
+      assert T.any?([false, true]) == true
+    end
+
+    test "list contains zero" do
+      assert T.any?([0]) == true
+    end
+  end
+
+  describe "all?" do
+    test "empty list" do
+      assert T.all?([]) == true
+    end
+
+    test "list contains true" do
+      assert T.all?([true]) == true
+    end
+
+    test "list contains false" do
+      assert T.all?([false]) == false
+    end
+
+    test "list contains true and false" do
+      assert T.all?([true, false]) == false
+      assert T.all?([false, true]) == false
+    end
+
+    test "list contains zero" do
+      assert T.all?([0]) == true
+    end
+  end
+
+  describe "count" do
+    test "empty list" do
+      assert T.count([]) == 0
+    end
+
+    test "normal list" do
+      assert T.count([1, 2, 3, 4]) == 4
+    end
+
+    test "huge list" do
+      assert T.count(Enum.to_list(1..1_000_000)) == 1_000_000
+    end
+  end
 end
